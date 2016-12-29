@@ -51,7 +51,7 @@
 	- 考虑到评价标准是**MPSE**，我们首先对label进行 **log transformation** 即$y\prime = log(x+1)$，预测后再使用$y^{predict} = exp(y\prime) - 1$变换回来
 		- 但是效果提升不大
 	- 考虑大部分回归模型的目标函数都是**MSE**的，label较大的对于误差的影响显然更大一些；而本题的评价函数是**MPSE**，label较小的更容易带来误差
-		- 于是我们对训练样本设置了权重，<img src="http://www.forkosh.com/mathtex.cgi? weight_i = \frac{1.0}{y^*_i*y^*_i}">，线上效果明显提升(0.05)
+		- 于是我们对训练样本设置了权重，![equation](http://latex.codecogs.com/gif.latex?weight_i = \frac{1.0}{y^*_i*y^*_i})，线上效果明显提升(0.05)
 
 	- 模型融合
 		- 我们将LinearRegression、Xgboost、RandomForest的结果进行加权融合
