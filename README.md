@@ -6,7 +6,7 @@
 - 使用2016年6月以前的农产品价格数据预测7月的农产品价格
 
 #### 成绩
-- 复赛第2，我们就是`xjb搞`队。。。
+- 复赛第2，我们就是`xjboost`队。。。
 
 #### 代码说明
 - gen.py
@@ -48,10 +48,10 @@
 	- 一些简单的规则
 		- 如提交最后一次的价格线上评分就能达到 **0.06088**
 	- 直接使用模型的训练效果仅为**0.12**左右还不如简单的规则
-	- 考虑到评价标准是**MPSE**，我们首先对label进行 **log transformation** 即![equation](http://latex.codecogs.com/gif.latex? y^{'} = log(x+1) )，预测后再使用![equation](http://latex.codecogs.com/gif.latex? y^{predict} = exp(y^{'}) - 1 )变换回来
+	- 考虑到评价标准是**MPSE**，我们首先对label进行 **log transformation** 即$y\prime = log(x+1)$，预测后再使用$y^{predict} = exp(y\prime) - 1$变换回来
 		- 但是效果提升不大
 	- 考虑大部分回归模型的目标函数都是**MSE**的，label较大的对于误差的影响显然更大一些；而本题的评价函数是**MPSE**，label较小的更容易带来误差
-		- 于是我们对训练样本设置了权重，![equation](http://latex.codecogs.com/gif.latex? weight_i = 1/(y^*_i*y^*_i))，线上效果明显提升(0.05)
+		- 于是我们对训练样本设置了权重，$weight_i = \frac{1.0}{y^*_i*y^*_i}$，线上效果明显提升(0.05)
 
 	- 模型融合
 		- 我们将LinearRegression、Xgboost、RandomForest的结果进行加权融合
